@@ -35,10 +35,16 @@ def check_login():
 		start = 13
 		end = response.find('expires', start) - 1
 		access_token = response[start:end]
+		"""
 		print '>>>>>>>>>>>>>>>> AT: %s' % access_token
 		print '>>>>>>>>>>>>>>>> %s' % response
 		temp = access_token + '\n' + response[13:]
-	return temp
+		"""
+		req = 'https://graph.facebook.com//v2.2/me/friends?fields=name&access_token=' + access_token
+		temp = requests.get(req).content
+		return temp
+	else:
+		return 'Error'
 
 
 if __name__ == '__main__':

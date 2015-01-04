@@ -3,8 +3,8 @@ import requests
 
 import oauth2client.client as oc
 
-APP_ID = '797919983576720'
-APP_SECRET = 'c0007c8e44ece2a053712a1c1045b210'
+APP_ID = 'API_ID'
+APP_SECRET = 'API_SECRET'
 APP_NAME = 'EmailID Chor'
 REDIRECT_URI = 'http://localhost:8080/fapicallback'
 

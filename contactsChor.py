@@ -3,8 +3,8 @@ import requests
 
 import oauth2client.client as oc
 
-APP_ID = 'API_ID'
-APP_SECRET = 'API_SECRET'
+APP_ID = 'APP_ID'
+APP_SECRET = 'APP_SECRET'
 APP_NAME = 'EmailID Chor'
 REDIRECT_URI = 'http://localhost:8080/fapicallback'
 
@@ -29,7 +29,9 @@ def check_login():
 		return 'invalid login'
 	code = request.args.get('code')
 	req = 'https://graph.facebook.com/oauth/access_token?client_id=' + APP_ID + '&redirect_uri=' + REDIRECT_URI + '&client_secret=' + APP_SECRET + '&code=' + code
-	print '>>>>>>>>>>>>>>>> Req: %s' % req
+	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+	print ' Req: %s' % req
+	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 	response = requests.get(req).content
 	if response.startswith('access_token'):
 		start = 13
@@ -40,10 +42,23 @@ def check_login():
 		print '>>>>>>>>>>>>>>>> %s' % response
 		temp = access_token + '\n' + response[13:]
 		"""
-		req = 'https://graph.facebook.com//v2.2/me/friends?fields=name&access_token=' + access_token
-		temp = requests.get(req).content
+		req = 'https://graph.facebook.com/v2.2/me/friends?fields=name&access_token=' + access_token
+		req = 'https://graph.facebook.com/v2.2/me/taggable_friends?fields=name&access_token=' + access_token
+		req = 'https://graph.facebook.com/v2.2/me/friends?fields=id,name,picture.type(large)&access_token=' + access_token
+		req = 'https://graph.facebook.com/v2.2/me/taggable_friends?fields=name,picture.type(large)&access_token=' + access_token
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+		print req
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+		k = requests.get(req)
+		temp = k.content
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+		print temp
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 		return temp
 	else:
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+		print 'Error'
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 		return 'Error'
 
 
